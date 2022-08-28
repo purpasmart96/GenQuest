@@ -44,7 +44,7 @@ static void GenQuest(MissionInfo mission)
     char part6[64];
     char part7[64];
     // put in the name
-    snprintf(buffer, 512, "%s.Missions[\"%s\"] ", mission.ground, mission.name);
+    snprintf(buffer, 512, "SV.%s.Missions[\"%s\"] ", mission.ground, mission.name);
 
     if (mission.type == 0)
     {
