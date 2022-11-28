@@ -38,12 +38,7 @@ static void GenQuest(MissionInfo *mission)
 {
     FILE *fp;
     char buffer[512];
-    char part2[128];
-    char part3[64];
-    char part4[64];
-    char part5[64];
-    char part6[64];
-    char part7[64];
+    char temp[128];
 
     // put in the name
     // This is now hardcoded
@@ -52,45 +47,44 @@ static void GenQuest(MissionInfo *mission)
 
     if (mission->type == 0)
     {
-        snprintf(part2, 128, "= { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE, ");
+        snprintf(temp, 128, "= { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE, ");
     }
     else if (mission->type == 1)
     {
-        snprintf(part2, 128, "= { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT, ");
+        snprintf(temp, 128, "= { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT, ");
     }
     else
     {
-        snprintf(part2, 128, "= { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, ");
+        snprintf(temp, 128, "= { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, ");
     }
 
-    append(buffer, 128, part2);
+    append(buffer, 128, temp);
 
-    snprintf(part3, 64, "DestZone = \"%s\", ", mission->zone);
-    append(buffer, 64, part3);
-    snprintf(part4, 64, "DestSegment = %d, ", mission->segment);
-    append(buffer, 64, part4);
-    snprintf(part5, 64, "DestFloor = %d, ", mission->floor);
-    append(buffer, 64, part5);
+    snprintf(temp, 128, "DestZone = \"%s\", ", mission->zone);
+    append(buffer, 128, temp);
+    snprintf(temp, 128, "DestSegment = %d, ", mission->segment);
+    append(buffer, 128, temp);
+    snprintf(temp, 128, "DestFloor = %d, ", mission->floor);
+    append(buffer, 128, temp);
 
 
     if (mission->type == Escort)
     {
-        snprintf(part6, 64, "TargetSpecies = \"%s\", ", mission->client);
-        append(buffer, 64, part6);
+        snprintf(temp, 128, "TargetSpecies = \"%s\", ", mission->client);
+        append(buffer, 128, temp);
 
-        snprintf(part7, 64, "EscortSpecies = \"%s\" }", mission->escort);
-        append(buffer, 64, part7);
+        snprintf(temp, 128, "EscortSpecies = \"%s\" }", mission->escort);
+        append(buffer, 128, temp);
     }
     else
     {
-        snprintf(part6, 64, "TargetSpecies = \"%s\" }", mission->client);
-        append(buffer, 64, part6);
+        snprintf(temp, 128, "TargetSpecies = \"%s\" }", mission->client);
+        append(buffer, 128, temp);
     }
 
     fp = fopen("output.txt","w");
     fwrite(buffer, 1, strlen(buffer), fp);
     fclose(fp);
-
 }
 
 
